@@ -59,9 +59,9 @@ order by count
 
 --Soal 4
 select Kota, count (id) AS count 
-from Pengarang 
+from Pengarang   
 group by Kota 
-having count(id) > 1
+having count(id) > 2
 order by count
 
 --Soal 5
@@ -74,11 +74,16 @@ select Gaji from Gaji order by Gaji desc
 select Gaji from Gaji
 where Gaji > 600000
 
+--tambahan soal 7
+select g.Gaji as Gaji, p.nama as Nama, P.kota as kota
+from Gaji as g
+join Pengarang as p on g.kd_Pengarang = p.kd_Pengarang
+where gaji > 600000 order by Gaji
+
 --Soal 8
-select Gaji, COUNT(id) AS count 
+select sum(Gaji) 
 from Gaji
-group by Gaji 
-order by count
+
 
 --Soal 9
 SELECT COUNT(*) AS count, Peng.Kota AS Kota_Pengarang, Gaj.Gaji AS Gaji_Pengarang
@@ -96,9 +101,12 @@ WHERE Kota = 'Yogya' OR
 Kota = 'Solo' OR
 Kota = 'Magelang'
 
+--Tambahan 11
+select * from Pengarang where Kota not in ('yogya', 'solo', 'magelang', 'jakarta')
+
 --Soal 12
 SELECT * FROM Pengarang
-WHERE NOT Kota =   'Yogya'
+WHERE NOT Kota = 'Yogya'
 
 --Soal 13 (A)
 SELECT * FROM Pengarang
@@ -144,8 +152,10 @@ WHERE Nama = 'Rian'
 
 --Soal 19
 GO
-CREATE VIEW vw_Pengarang AS 
+CREATE VIEW vw_Pengarang AS
 SELECT Peng.kd_Pengarang, Peng.Nama, Peng.Kota, Gaj.Gaji
 FROM Pengarang AS Peng
 JOIN Gaji AS gaj ON Peng.kd_Pengarang = Gaj.kd_Pengarang
 GO
+
+select * from Pengarang
