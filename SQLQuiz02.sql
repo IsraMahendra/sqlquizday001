@@ -88,4 +88,101 @@ INSERT INTO Genre(Kd_Genre, Nm_Genre) VALUES
 ('G005', 'THRILLER'),
 ('G006', 'FICTION')
 
-SELECT * FROM Genre
+SELECT * FROM Film
+Update Film Set = 'SPIDERMAN HOME COMING' WHERE =
+
+--SOAL 1
+SELECT P.Nm_Produser, SUM(F.Pendapatan) AS Pendapatan
+FROM Film AS F
+JOIN Produser AS P ON F.Produser = P.Kd_Produser
+WHERE P.Nm_Produser = 'MARVEL'
+GROUP BY P.Nm_Produser
+HAVING SUM (F.Pendapatan) <= 7500000000
+--HAVING P.Nm_Produser = 'MARVEL'
+
+--SOAL 2
+SELECT Nm_Film, nominal
+FROM Film
+WHERE nominal = 0
+
+alter table Film Add Nominasi Varchar(100)
+Update Film
+set Nominasi = nominal
+select * from Film
+Alter table Film drop column nominal
+--rename Column
+exec sp_rename 'film.Nominasi2', 'Nominasi','Column'
+
+--SOAL 3
+SELECT Nm_Film
+FROM Film
+WHERE Nm_Film LIKE 'P%'
+
+--SOAL 4
+SELECT Nm_Film
+FROM Film
+WHERE Nm_Film LIKE '%Y'
+
+--SOAL 5
+SELECT Nm_Film
+FROM Film
+WHERE  Nm_Film LIKE '%D%'
+
+--SOAL 6
+SELECT Nm_Film, Nama_Artis
+FROM Film AS F
+JOIN Artis AS A ON F.Artis = A.kd_Artis
+
+
+--SOAL 7
+SELECT Nm_Film, Kd_Negara
+FROM Film
+JOIN Artis AS A ON Artis = A.kd_Artis
+JOIN Negara AS N ON Kd_negara = A.Negara
+WHERE Nm_Negara = 'HONGKONG'
+
+--SOAL 8
+SELECT Nm_Film, Nm_Negara
+FROM Film AS F
+JOIN Artis AS A ON F.Artis = A.kd_Artis
+JOIN Negara AS N ON N.Kd_Negara = A.Negara
+WHERE N.Nm_Negara NOT LIKE '%O%'
+
+--SOAL 9
+SELECT A.Nama_Artis
+FROM Film AS F
+RIGHT JOIN Artis AS A ON F.Artis = A.kd_Artis
+Where Kd_Film is null
+
+--Soal 10
+SELECT A.Nm_Artis, G.Nm_Genre
+FROM Film AS F
+JOIN artist AS a ON f.artist = a.cd_artist
+JOIN genre AS g ON g.cd_genre  = f.genre
+WHERE g.nm_genre = 'DRAMA' 
+
+--11
+SELECT DISTINCT a.nm_artist, g.nm_genre
+FROM film AS f
+JOIN artist AS a ON f.artist = a.cd_artist
+RIGHT JOIN genre AS g ON g.cd_genre  = f.genre
+WHERE g.nm_genre = 'ACTION'
+
+--12
+SELECT c.cd_country, c.nm_country, COUNT(f.nm_film)AS total_film
+FROM film AS f
+JOIN artist AS a ON a.cd_artist = f.artist
+RIGHT JOIN country AS c ON c.cd_country = a.country
+GROUP BY c.cd_country, c.nm_country
+
+--13
+SELECT f.nm_film
+FROM film AS f
+JOIN producer AS p ON p.cd_producer = f.producer
+WHERE p.international = 'YA'
+
+--14
+SELECT p.nm_producer, COUNT(f.nm_film)AS total_film
+FROM film AS f
+RIGHT JOIN producer AS p ON p.cd_producer = f.producer
+GROUP BY p.nm_producer
