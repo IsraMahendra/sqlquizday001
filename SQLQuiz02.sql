@@ -155,34 +155,34 @@ RIGHT JOIN Artis AS A ON F.Artis = A.kd_Artis
 Where Kd_Film is null
 
 --Soal 10
-SELECT A.Nm_Artis, G.Nm_Genre
+SELECT A.Nama_Artis, G.Nm_Genre
 FROM Film AS F
-JOIN artist AS a ON f.artist = a.cd_artist
-JOIN genre AS g ON g.cd_genre  = f.genre
-WHERE g.nm_genre = 'DRAMA' 
+JOIN Artis AS A ON F.Artis = A.kd_Artis
+JOIN Genre AS G ON G.Kd_Genre  = F.Genre
+WHERE G.Nm_Genre = 'DRAMA' 
 
 --11
-SELECT DISTINCT a.nm_artist, g.nm_genre
-FROM film AS f
-JOIN artist AS a ON f.artist = a.cd_artist
-RIGHT JOIN genre AS g ON g.cd_genre  = f.genre
-WHERE g.nm_genre = 'ACTION'
+SELECT DISTINCT A.Nama_Artis, G.Nm_Genre
+FROM Film AS F
+JOIN Artis AS A ON F.Artis = A.kd_Artis
+RIGHT JOIN Genre AS G ON G.Kd_Genre  = F.Genre
+WHERE G.Nm_Genre = 'ACTION'
 
 --12
-SELECT c.cd_country, c.nm_country, COUNT(f.nm_film)AS total_film
-FROM film AS f
-JOIN artist AS a ON a.cd_artist = f.artist
-RIGHT JOIN country AS c ON c.cd_country = a.country
-GROUP BY c.cd_country, c.nm_country
+SELECT N.Kd_Negara, N.Nm_Negara, COUNT(f.Nm_Film)AS Total_film
+FROM Film AS F
+JOIN Artis AS A ON A.kd_Artis = F.Artis
+RIGHT JOIN Negara AS N ON N.Kd_Negara = A.Negara
+GROUP BY N.Kd_negara, Nm_negara
 
 --13
-SELECT f.nm_film
-FROM film AS f
-JOIN producer AS p ON p.cd_producer = f.producer
-WHERE p.international = 'YA'
+SELECT F.Nm_Film
+FROM Film AS F
+JOIN Produser AS P ON P.Kd_Produser = F.Produser
+WHERE P.International = 'YA'
 
 --14
-SELECT p.nm_producer, COUNT(f.nm_film)AS total_film
-FROM film AS f
-RIGHT JOIN producer AS p ON p.cd_producer = f.producer
-GROUP BY p.nm_producer
+SELECT P.Nm_Produser, COUNT(F.Nm_Film)AS Total_film
+FROM Film AS F
+RIGHT JOIN Produser AS P ON P.Kd_Produser = F.Produser
+GROUP BY P.Nm_Produser
